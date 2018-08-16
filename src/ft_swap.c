@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sungurea <sungurea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/12 21:50:00 by sungurea          #+#    #+#             */
-/*   Updated: 2018/08/16 13:39:55 by sungurea         ###   ########.fr       */
+/*   Created: 2018/07/17 16:51:15 by andmiron          #+#    #+#             */
+/*   Updated: 2018/08/16 13:40:51 by sungurea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/fillit.h"
+#include "../includes/fillit.h"
 
-int     main(int argc, char **argv)
+void	ft_swap(int *a, int *b)
 {
-    int i;
-	int fd;
-	
-	i = 0;
-	while (++i < argc)
-	{
-		fd = open(argv[i], O_RDONLY);
-		if (fd)
-			parsing(argv[i], fd);
-	}
-	return (0);
+	int	aux;
+
+	aux = *a;
+	*a = *b;
+	*b = aux;
+}
+
+void		ft_doublecmp(int i, int *y, int j, int *x)
+{
+	if (*y < i)
+		*y = i;
+	if (*x < j)
+		*x = j;
 }
