@@ -6,7 +6,7 @@
 /*   By: sungurea <sungurea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/15 08:21:33 by sungurea          #+#    #+#             */
-/*   Updated: 2018/08/16 20:10:59 by sungurea         ###   ########.fr       */
+/*   Updated: 2018/08/16 20:29:33 by sungurea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,8 @@ int     	pre_validate(int fd)
 	return (k / 4);
 }
 
-t_tetris	*convert(char *file, t_tetris *ttr)
+t_tetris	*convert(int fd, t_tetris *ttr)
 {
-	int			fd;
 	int			i;
 	int			j;
 	int			k;
@@ -50,7 +49,6 @@ t_tetris	*convert(char *file, t_tetris *ttr)
 	i = 0;
 	j = 0;
 	k = 0;
-	fd = open(file, O_RDONLY);
 	while (read(fd, &c, 1))
 	{
 		if (j == 4 && ++i)
@@ -125,13 +123,19 @@ t_tetris	*parsing(char *file, int fd)
 	vld = pre_validate(fd);
 	ttr = (t_tetris*)malloc(sizeof(t_tetris) * vld);
 	if (vld)
-		ttr = convert(file, ttr);
+	{
+		fd = open(file, O_RDONLY);
+		ttr = convert(fd, ttr);
+		close (fd);
+	}
 	else
-		write(1, "map error\n", 10);
+		return NULL;
 	if (post_validate(ttr, vld))
 	{
 		ttr = arrange(ttr, vld);
 		printstruct(ttr, vld);
 	}
-	return NULL;
+	else
+		return NULL;
+	return (ttr);
 }
