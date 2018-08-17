@@ -6,7 +6,7 @@
 /*   By: sungurea <sungurea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 17:06:06 by sungurea          #+#    #+#             */
-/*   Updated: 2018/08/16 20:18:41 by sungurea         ###   ########.fr       */
+/*   Updated: 2018/08/17 22:10:03 by sungurea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ int				post_validate(t_tetris *ttr, int sz);
 t_tetris		*arrange(t_tetris *ttr, int sz);
 t_tetris		*parsing(char *file, int fd);
 void    		printstruct(t_tetris *ttr, int vld);
+int				sqmerge(int vld);
 
 #endif

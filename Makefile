@@ -6,7 +6,7 @@
 #    By: sungurea <sungurea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/26 14:33:05 by pguthaus          #+#    #+#              #
-#    Updated: 2018/08/16 20:08:05 by sungurea         ###   ########.fr        #
+#    Updated: 2018/08/17 22:11:22 by sungurea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ YELLOW = \033[1;33m
 # Paths
 
 SRCS =		main.c			\
-			src/ft_swap.c 	\
+			src/fx.c 	\
 			src/parsing.c	\
 			src/printstruct.c
 

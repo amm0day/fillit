@@ -6,7 +6,7 @@
 /*   By: sungurea <sungurea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/15 08:21:33 by sungurea          #+#    #+#             */
-/*   Updated: 2018/08/16 20:29:33 by sungurea         ###   ########.fr       */
+/*   Updated: 2018/08/17 22:08:30 by sungurea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,10 @@ t_tetris	*arrange(t_tetris *ttr, int sz)
 					ttr[sz].x = 0;
 					ttr[sz].y = 0;
 				}
+				if (ttr[sz].tt[i][j] > 0)
+					ft_doublecmp(i - di + 1, &(ttr[sz].y), j - dj + 1, &(ttr[sz].x));
 				if (ttr[sz].tt[i][j] > 0 && (di || dj))
 					ft_swap(&(ttr[sz].tt[i - di][j - dj]), &(ttr[sz].tt[i][j]));
-				if (ttr[sz].tt[i][j] > 0)
-					ft_doublecmp(i - di, &(ttr[sz].y), j - dj, &(ttr[sz].x));
 			}
 	return (ttr);
 }
