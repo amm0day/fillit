@@ -6,7 +6,7 @@
 #    By: sungurea <sungurea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/26 14:33:05 by pguthaus          #+#    #+#              #
-#    Updated: 2018/08/17 22:11:22 by sungurea         ###   ########.fr        #
+#    Updated: 2018/08/17 22:32:17 by mnegrea          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ YELLOW = \033[1;33m
 SRCS =		main.c			\
 			src/fx.c 	\
 			src/parsing.c	\
-			src/printstruct.c
+			src/printstruct.c\
+			src/ft_fillit.c
 
 
 OBJS = $(SRCS:.c=.o)

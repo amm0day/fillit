@@ -36,5 +36,10 @@ t_tetris		*arrange(t_tetris *ttr, int sz);
 t_tetris		*parsing(char *file, int fd);
 void    		printstruct(t_tetris *ttr, int vld);
 int				sqmerge(int vld);
+void            ft_copy(int n,int a[n][n],int copy[n][n]);
+int             ft_chek(int n,int a[n][n],int xa,int ya,int tet,t_tetris *ttr);
+void            ft_fillzero(int n,int a[n][n]);
+int             ft_pass(int n,int a[n][n],int tet,int ya,int xa,t_tetris *ttr,int vld);
+void            ft_fill(int n,int tet,t_tetris *ttr);
 
 #endif

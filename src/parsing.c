@@ -118,9 +118,11 @@ t_tetris	*arrange(t_tetris *ttr, int sz)
 t_tetris	*parsing(char *file, int fd)
 {
 	int			vld;
+    int         sqm;
 	t_tetris	*ttr;
 
 	vld = pre_validate(fd);
+    sqm = sqmerge(vld);
 	ttr = (t_tetris*)malloc(sizeof(t_tetris) * vld);
 	if (vld)
 	{
@@ -133,7 +135,7 @@ t_tetris	*parsing(char *file, int fd)
 	if (post_validate(ttr, vld))
 	{
 		ttr = arrange(ttr, vld);
-		printstruct(ttr, vld);
+		ft_fill(sqm,vld,ttr);
 	}
 	else
 		return NULL;
