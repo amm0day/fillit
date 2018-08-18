@@ -100,10 +100,11 @@ t_tetris	*arrange(t_tetris *ttr, int sz)
 		while (++i < 4 && (j = -1))
 			while (++j < 4)
 			{
-				if (ttr[sz].tt[i][j] > 0 && di < 0 && dj < 0)
+                if (ttr[sz].tt[i][j] > 0 && di < 0 && dj < 0)
 				{
 					di = i;
 					dj = j;
+                    while(j && (ttr[sz].tt[i + 1][--j] || ttr[sz].tt[i + 2][j]) && --dj);
 					ttr[sz].x = 0;
 					ttr[sz].y = 0;
 				}

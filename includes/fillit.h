@@ -27,6 +27,14 @@ typedef struct  s_tetris
 	int     	tt[4][4];
 }				t_tetris;
 
+typedef struct pass
+{
+    t_tetris *ttr;
+    int vld;
+    int m;
+    int tet;
+}               variables;
+
 void			ft_swap(int *a, int *b);
 void			ft_doublecmp(int i, int *y, int j, int *x);
 int     		pre_validate(int fd);
@@ -39,7 +47,8 @@ int				sqmerge(int vld);
 void            ft_copy(int n,int a[n][n],int copy[n][n]);
 int             ft_chek(int n,int a[n][n],int xa,int ya,int tet,t_tetris *ttr);
 void            ft_fillzero(int n,int a[n][n]);
-int             ft_pass(int n,int a[n][n],int tet,int ya,int xa,t_tetris *ttr,int vld);
+void            ft_afis(int m,int cnv[m][m]);
+int             ft_pass(variables gl,int cnv[gl.m][gl.m],int ya,int xa);
 void            ft_fill(int n,int tet,t_tetris *ttr);
 
 #endif

@@ -1,18 +1,6 @@
 
 #include "../includes/fillit.h"
 
-void ft_copy(int n,int a[n][n],int copy[n][n])
-{
-    int x;
-    int y = -1;
-
-    while(++y < n)
-    {
-        x = -1;
-        while (++x < n)
-            copy[y][x] = a[y][x];
-    }
-}
 
 int ft_chek(int n,int a[n][n],int xa,int ya,int tet,t_tetris *ttr)
 {
@@ -53,46 +41,56 @@ void ft_fillzero(int n,int a[n][n])
         ya++;
     }
 }
-void ft_afis(int n,int copy[n][n])
+void ft_afis(int m,int cnv[m][m])
 {
     int xa;
     int ya;
+
     ya = -1;
-    while (++ya < n)
+    while (++ya < m)
     {
         xa = -1;
-        while (++xa < n)
-            if(copy[ya][xa] == 0)
+        while (++xa < m)
+            if(cnv[ya][xa] == 0)
                 printf(".");
             else
-                printf("%c", copy[ya][xa]);
+                printf("%c", cnv[ya][xa]);
         puts(" ");
     }
 }
-
-int ft_pass(int n,int a[n][n],int tet,int ya,int xa,t_tetris *ttr,int vld)
+void ft_copy(int n,int a[n][n],int copy[n][n])
 {
-    int copy[n][n];
+    int x;
+    int y = -1;
+
+    while(++y < n)
+    {
+        x = -1;
+        while (++x < n)
+            copy[y][x] = a[y][x];
+    }
+}
+
+int ft_pass(variables gl ,int cnv[gl.m][gl.m],int ya,int xa)
+{
+    int cpy[gl.m][gl.m];
     int yt;
     int xt;
     int count = 0;
-    int m = vld;
 
-    ft_copy(n, a, copy);
+    ft_copy(gl.m,cnv,cpy);
     xa--;
-    while (++xa < n && tet < m)
+    while (++xa < gl.m && gl.tet < gl.vld)
     {
-        if (copy[ya][xa] > 0)
-            continue;
-        if (ft_chek(n, copy, xa, ya, tet, ttr))
+        if (cpy[ya][xa] > 0 || ft_chek(gl.m, cpy, xa, ya, gl.tet, gl.ttr))
             continue;
         yt = -1;
-        while (++yt < ttr[tet].y)
+        while (++yt < gl.ttr[gl.tet].y)
         {
             xt = -1;
-            while (++xt < ttr[tet].x)
-                if (ttr[tet].tt[yt][xt] > 0)
-                    copy[ya + yt][xa + xt] = ttr[tet].tt[yt][xt];
+            while (++xt < gl.ttr[gl.tet].x)
+                if (gl.ttr[gl.tet].tt[yt][xt] > 0)
+                    cpy[ya + yt][xa + xt] = gl.ttr[gl.tet].tt[yt][xt];
         }
         count = 1;
         break;
@@ -100,20 +98,30 @@ int ft_pass(int n,int a[n][n],int tet,int ya,int xa,t_tetris *ttr,int vld)
     if (count == 0)
         return 0;
     yt = 0;
-    while (ft_pass(n, copy, tet + 1, yt, 0, ttr, vld) == 0 && ++yt < n && tet < m - 1);
-    if (tet == m - 1 ||
-        (tet < ft_pass(n, a, tet, ya, xa + 1, ttr, vld) || tet < ft_pass(n, a, tet, ya + 1, 0, ttr, vld)))
-        if (tet == m - 1)
+    gl.tet++;
+    while (ft_pass(gl, cpy, yt, 0) == 0 && ++yt < gl.m && gl.tet < gl.vld);
+    gl.tet--;
+    if (gl.tet == gl.vld - 1|| gl.tet < ft_pass(gl, cnv, ya, xa + 1)) {
+        if (gl.tet == gl.vld - 1)
         {
-            ft_afis(n,copy);
-                exit(0);
+            ft_afis(gl.m, cpy);
+            exit(0);
         }
-    return tet;
+    }
+    return 0;
 }
-void ft_fill(int n,int tet,t_tetris *ttr)
+void ft_fill(int m,int vld,t_tetris *ttr)
 {
-    int canvas[n][n];
-    ft_fillzero(n, canvas);
-    while(!ft_pass(n, canvas, 0, 0, 0,ttr,tet))
-        ft_fill(n + 1,tet, ttr);
+    variables gl;
+    int cnv[m][m];
+
+    gl.ttr = ttr;
+    gl.m = m;
+    gl.vld = vld;
+    gl.tet = 0;
+    ft_fillzero(gl.m,cnv);
+//    printf("%d\n",m);
+//    printf("%d",m);
+    while(!ft_pass(gl, cnv, 0, 0))
+        ft_fill(gl.m + 1,gl.vld, gl.ttr);
 }
