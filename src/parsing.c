@@ -104,7 +104,8 @@ t_tetris	*arrange(t_tetris *ttr, int sz)
 				{
 					di = i;
 					dj = j;
-                    while(j && (ttr[sz].tt[i + 1][--j] || ttr[sz].tt[i + 2][j]) && --dj);
+                    while(j && (ttr[sz].tt[i + 1][--j] || ttr[sz].tt[i + 2][j]) && --dj)
+                    	;
 					ttr[sz].x = 0;
 					ttr[sz].y = 0;
 				}
@@ -136,7 +137,7 @@ t_tetris	*parsing(char *file, int fd)
 	if (post_validate(ttr, vld))
 	{
 		ttr = arrange(ttr, vld);
-		ft_fill(sqm,vld,ttr);
+		ft_fill(sqm ,vld,ttr);
 	}
 	else
 		return NULL;
