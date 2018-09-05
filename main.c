@@ -6,17 +6,17 @@
 /*   By: sungurea <sungurea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/12 21:50:00 by sungurea          #+#    #+#             */
-/*   Updated: 2018/08/16 20:30:21 by sungurea         ###   ########.fr       */
+/*   Updated: 2018/09/05 19:08:07 by mnegrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/fillit.h"
 
-int     main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
-    int i;
-	int fd;
-	
+	int	i;
+	int	fd;
+
 	i = 0;
 	while (++i < argc)
 	{

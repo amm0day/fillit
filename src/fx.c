@@ -6,7 +6,7 @@
 /*   By: sungurea <sungurea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 16:51:15 by andmiron          #+#    #+#             */
-/*   Updated: 2018/08/17 22:11:15 by sungurea         ###   ########.fr       */
+/*   Updated: 2018/09/05 18:32:01 by mnegrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int			sqmerge(int vld)
 {
 	int power;
 
-    power = 1;
+	power = 1;
 	vld *= 4;
 	while (power * power < vld)
-        power++;
-    return (power);
+		power++;
+	return (power);
 }

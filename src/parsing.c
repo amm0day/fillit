@@ -6,15 +6,15 @@
 /*   By: sungurea <sungurea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/15 08:21:33 by sungurea          #+#    #+#             */
-/*   Updated: 2018/08/17 22:08:30 by sungurea         ###   ########.fr       */
+/*   Updated: 2018/09/05 18:59:01 by mnegrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fillit.h"
 
-int     	pre_validate(int fd)
+int			pre_validate(int fd)
 {
-	int 	j;
+	int		j;
 	int		i;
 	int		k;
 	char	c;
@@ -35,7 +35,7 @@ int     	pre_validate(int fd)
 			return (0);
 	if (!(c == '\n' && j == 0 && i == 4 && !(k % 4)))
 		return (0);
-	close (fd);
+	close(fd);
 	return (k / 4);
 }
 
@@ -78,10 +78,10 @@ int			post_validate(t_tetris *ttr, int sz)
 		while (++i < 4 && (j = -1))
 			while (++j < 4)
 				if (ttr[k].tt[i][j] > 0 && !((i + 1 < 4 &&
-					ttr[k].tt[i + 1][j] > 0) || (j + 1 < 4 &&
-					ttr[k].tt[i][j + 1] > 0) || (i - 1 >= 0 &&
-					ttr[k].tt[i - 1][j] > 0) || (j - 1 >= 0 &&
-					ttr[k].tt[i][j - 1] > 0)))
+								ttr[k].tt[i + 1][j] > 0) || (j + 1 < 4 &&
+									ttr[k].tt[i][j + 1] > 0) || (i - 1 >= 0 &&
+										ttr[k].tt[i - 1][j] > 0) ||
+							(j - 1 >= 0 && ttr[k].tt[i][j - 1] > 0)))
 				{
 					free(ttr);
 					return (0);
@@ -100,12 +100,12 @@ t_tetris	*arrange(t_tetris *ttr, int sz)
 		while (++i < 4 && (j = -1))
 			while (++j < 4)
 			{
-                if (ttr[sz].tt[i][j] > 0 && di < 0 && dj < 0)
+				if (ttr[sz].tt[i][j] > 0 && di < 0 && dj < 0)
 				{
 					di = i;
 					dj = j;
-                    while(j && (ttr[sz].tt[i + 1][--j] || ttr[sz].tt[i + 2][j]) && --dj)
-                    	;
+					while (j && (ttr[sz].tt[i + 1][--j] || ttr[sz].tt[i + 2][j]) && --dj)
+						;
 					ttr[sz].x = 0;
 					ttr[sz].y = 0;
 				}
@@ -120,26 +120,26 @@ t_tetris	*arrange(t_tetris *ttr, int sz)
 t_tetris	*parsing(char *file, int fd)
 {
 	int			vld;
-    int         sqm;
+	int			sqm;
 	t_tetris	*ttr;
 
 	vld = pre_validate(fd);
-    sqm = sqmerge(vld);
+	sqm = sqmerge(vld);
 	ttr = (t_tetris*)malloc(sizeof(t_tetris) * vld);
 	if (vld)
 	{
 		fd = open(file, O_RDONLY);
 		ttr = convert(fd, ttr);
-		close (fd);
+		close(fd);
 	}
 	else
-		return NULL;
+		return (NULL);
 	if (post_validate(ttr, vld))
 	{
 		ttr = arrange(ttr, vld);
-		ft_fill(sqm ,vld,ttr);
+		ft_fill(sqm, vld, ttr);
 	}
 	else
-		return NULL;
+		return (NULL);
 	return (ttr);
 }
