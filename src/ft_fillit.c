@@ -2,136 +2,90 @@
 
 
 
-void ft_fillone(variables gl,int cnv[gl.m][gl.m],int y,int x)
+void ft_fillone(variables gl,int tet,int cord[2],int **cnv)
 {
     int yt;
     int xt;
 
     yt = -1;
-    while (++yt < gl.ttr[gl.tet].y )
+    while (++yt < gl.ttr[tet].y )
     {
         xt = -1;
-        while (++xt < gl.ttr[gl.tet].x)
-            if (gl.ttr[gl.tet].tt[yt][xt] > 0)
-                cnv[y + yt][x + xt] = gl.ttr[gl.tet].tt[yt][xt];
+        while (++xt < gl.ttr[tet].x)
+            if (gl.ttr[tet].tt[yt][xt] > 0)
+                cnv[cord[0] + yt][cord[1] + xt] = gl.ttr[tet].tt[yt][xt];
     }
 }
 
-int ft_chekones(variables gl,int cnv[gl.m][gl.m],int yc,int xc)
+int ft_chekones(variables gl,int tet,int cord[2],int **cnv)
 {
-
     int xt;
     int yt;
-    int x;
+    int cord1[2];
 
+    cord1[0] = cord[0];
+    cord1[1] = cord[1];
     xt = -1;
-    x = xc;
     yt = 0;
-    if(yc + gl.ttr[gl.tet].y > gl.m)
+    if(cord1[0] + gl.ttr[tet].y > gl.m)
         return 0;
-    while (gl.ttr[gl.tet].tt[0][++xt] == 0 && x > 0)
-        x--;
-    if(x + gl.ttr[gl.tet].x > gl.m)
+    while (gl.ttr[tet].tt[0][++xt] == 0 && cord1[1] > 0)
+        cord1[1]--;
+    if(cord1[1] + gl.ttr[tet].x > gl.m)
         return 0;
-    while (yt < gl.ttr[gl.tet].y)
+    while (yt < gl.ttr[tet].y)
     {
         xt = -1;
-        while (++xt < gl.ttr[gl.tet].x)
-            if(cnv[yc + yt][x + xt] != 0 && gl.ttr[gl.tet].tt[yt][xt] != 0)
+        while (++xt < gl.ttr[tet].x)
+            if(cnv[cord1[0] + yt][cord1[1] + xt] != 0 && gl.ttr[tet].tt[yt][xt] != 0)
                 return 0;
         yt++;
     }
-    ft_fillone(gl,cnv,yc,x);
+    ft_fillone(gl,tet,cord1,cnv);
     return 1;
 }
 
-void ft_afis(int m,int cnv[m][m])
+int ft_pass(variables gl,int tet,int **cnv)
 {
-    int x;
-    int y;
+    int cord[2];
 
-    y = -1;
-    while(++y < m)
+    if (tet == gl.vld)
     {
-        x = -1;
-        while(++x < m)
-        {
-            if(cnv[y][x] == 0)
-                write(1,".",1);
-            else
-                write(1,&cnv[y][x],1);
-        }
-        write(1,"\n",1);
+        ft_afis(gl.m,cnv);
+        exit(1);
     }
-}
-
-void ft_copy(int m,int cnv[m][m],int cpy[m][m])
-{
-    int y;
-    int x;
-
-    y = -1;
-    while (++y < m)
+    cord[0] = 0;
+    while (cord[0] < gl.m)
     {
-        x = -1;
-        while (++x < m)
-            cpy[y][x] = cnv[y][x];
-    }
-}
-
-int ft_pass(variables gl,int cnv [gl.m][gl.m],int y,int x)
-{
-    int cpy[gl.m][gl.m];
-
-    if (gl.tet == gl.vld)
-            {
-                ft_afis(gl.m,cnv);
-                exit(0);
-            }
-    ft_copy(gl.m,cnv,cpy);
-    while (y < gl.m)
-    {
-        while (x < gl.m)
+        cord[1] = 0;
+        while (cord[1] < gl.m)
         {
-            if (ft_chekones(gl, cpy, y, x))
+            if (ft_chekones(gl, tet, cord,cnv))
             {
-                gl.tet++;
-                ft_pass(gl, cpy, 0, 0);
-                gl.tet--;
+                ft_pass(gl, tet + 1, cnv);
+                ft_remove(gl,tet,cord,cnv);
             }
-            ft_copy(gl.m,cnv,cpy);
-            x++;
-            }
-            x = 0;
-            y++;
+            cord[1]++;
         }
+        cord[0]++;
+    }
     return 0;
-}
-
-void ft_fillzero(int m,int cnv[m][m])
-{
-    int x;
-    int y;
-
-    y = -1;
-    while (++y < m)
-    {
-        x = -1;
-        while (++x < m)
-            cnv[y][x] = 0;
-    }
 }
 
 void ft_fill(int m,int vld,t_tetris *ttr)
 {
     variables gl;
-    int cnv[m][m];
+    int **cnv;
 
     gl.ttr = ttr;
     gl.m = m;
     gl.vld = vld;
-    gl.tet = 0;
+    cnv = (int**)malloc(m * sizeof(int*));
+    ft_alloc(m,cnv,0);
     ft_fillzero(gl.m,cnv);
-    while(!ft_pass(gl, cnv, 0, 0))
-        ft_fill(m + 1,gl.vld, gl.ttr);
+    while(!ft_pass(gl, 0, cnv))
+    {
+        ft_alloc(m,cnv,1);
+        ft_fill(m + 1, gl.vld, gl.ttr);
+    }
 }

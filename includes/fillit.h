@@ -32,7 +32,6 @@ typedef struct pass
     t_tetris *ttr;
     int vld;
     int m;
-    int tet;
 }               variables;
 
 void			ft_swap(int *a, int *b);
@@ -44,10 +43,12 @@ t_tetris		*arrange(t_tetris *ttr, int sz);
 t_tetris		*parsing(char *file, int fd);
 void    		printstruct(t_tetris *ttr, int vld);
 int				sqmerge(int vld);
-void            ft_copy(int m,int cnv[m][m],int cpy[m][m]);
-void            ft_fillzero(int n,int a[n][n]);
-void            ft_afis(int m,int cnv[m][m]);
-int             ft_pass(variables gl,int cnv[gl.m][gl.m],int ya,int xa);
-void            ft_fill(int n,int tet,t_tetris *ttr);
-
+int             ft_chekones(variables gl,int tet,int cord[2],int **cnv);
+void            ft_fillzero(int n,int **cnv);
+void            ft_afis(int m,int **cnv);
+int             ft_pass(variables gl,int tet,int **cnv);
+void            ft_fill(int m,int tet,t_tetris *ttr);
+void            ft_alloc(int m,int **cnv,int choose);
+void            ft_remove(variables gl,int tet,int cord[2],int **cnv);
+void            ft_fillone(variables gl,int tet,int cord[2],int **cnv);
 #endif
