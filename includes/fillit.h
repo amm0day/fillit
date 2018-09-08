@@ -6,7 +6,7 @@
 /*   By: sungurea <sungurea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 17:06:06 by sungurea          #+#    #+#             */
-/*   Updated: 2018/09/08 14:37:08 by sungurea         ###   ########.fr       */
+/*   Updated: 2018/09/08 20:04:00 by sungurea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct	pass
 }				variables;
 
 void			ft_swap(int *a, int *b);
-void			ft_doublecmp(int i, int *y, int j, int *x);
+void			ft_dcmp(int i, int *y, int j, int *x);
 int				pre_validate(int fd);
 t_tetris		*convert(int fd, t_tetris *ttr);
 int				post_validate(t_tetris *ttr, int sz);

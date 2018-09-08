@@ -6,7 +6,7 @@
 /*   By: sungurea <sungurea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/12 21:50:00 by sungurea          #+#    #+#             */
-/*   Updated: 2018/09/05 19:08:07 by mnegrea          ###   ########.fr       */
+/*   Updated: 2018/09/08 19:49:15 by sungurea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		main(int argc, char **argv)
 		fd = open(argv[i], O_RDONLY);
 		if (fd)
 			if ((parsing(argv[i], fd) == NULL))
-				write(1, "map error\n", 10);
+				write(1, "error\n", 6);
 	}
 	return (0);
 }

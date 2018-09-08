@@ -6,7 +6,7 @@
 /*   By: sungurea <sungurea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/15 08:21:33 by sungurea          #+#    #+#             */
-/*   Updated: 2018/09/08 14:39:26 by sungurea         ###   ########.fr       */
+/*   Updated: 2018/09/08 20:03:50 by sungurea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@ int			pre_validate(int fd)
 	int		j;
 	int		i;
 	int		k;
+	int		f;
 	char	c;
 
 	j = 0;
 	k = 0;
 	i = 0;
+	f = 0;
 	while (read(fd, &c, 1))
 		if (c == '.' && j < 4 && i < 4)
 			j++;
@@ -29,14 +31,14 @@ int			pre_validate(int fd)
 			k++;
 		else if (c == '\n' && j == 4 && i++ < 4)
 			j = 0;
-		else if (c == '\n' && j == 0 && i == 4 && !(k % 4))
+		else if (c == '\n' && j == 0 && i == 4 && k == 4 && ++f && !(k = 0))
 			i = 0;
 		else
 			return (0);
-	if (!(c == '\n' && j == 0 && i == 4 && !(k % 4)))
+	if (!(c == '\n' && j == 0 && i == 4 && k == 4 && ++f))
 		return (0);
 	close(fd);
-	return (k / 4);
+	return (f);
 }
 
 t_tetris	*convert(int fd, t_tetris *ttr)
@@ -113,7 +115,7 @@ t_tetris	*arrange(t_tetris *ttr, int sz)
 						dj--;
 				}
 				if (ttr[sz].tt[i][j] > 0)
-					ft_doublecmp(i - di + 1, &(ttr[sz].y), j - dj + 1, &(ttr[sz].x));
+					ft_dcmp(i - di + 1, &(ttr[sz].y), j - dj + 1, &(ttr[sz].x));
 				if (ttr[sz].tt[i][j] > 0 && di > -1 && dj > -1)
 					ft_swap(&(ttr[sz].tt[i - di][j - dj]), &(ttr[sz].tt[i][j]));
 			}

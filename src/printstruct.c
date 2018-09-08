@@ -6,7 +6,7 @@
 /*   By: sungurea <sungurea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/16 20:04:04 by sungurea          #+#    #+#             */
-/*   Updated: 2018/09/07 23:47:34 by sungurea         ###   ########.fr       */
+/*   Updated: 2018/09/08 20:03:00 by sungurea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_remove(variables gl, int tet, int cord[2], int **cnv)
 		while (x < gl.m)
 		{
 			if (cnv[y][x] == gl.ttr[tet].tt[0][0]
-					|| cnv[y][x] == gl.ttr[tet].tt[1][0])
+					|| cnv[y][x] == gl.ttr[tet].tt[1][1])
 				cnv[y][x] = 0;
 			x++;
 		}

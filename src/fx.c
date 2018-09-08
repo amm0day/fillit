@@ -6,7 +6,7 @@
 /*   By: sungurea <sungurea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 16:51:15 by andmiron          #+#    #+#             */
-/*   Updated: 2018/09/05 18:32:01 by mnegrea          ###   ########.fr       */
+/*   Updated: 2018/09/08 20:04:11 by sungurea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		ft_swap(int *a, int *b)
 	*b = aux;
 }
 
-void		ft_doublecmp(int i, int *y, int j, int *x)
+void		ft_dcmp(int i, int *y, int j, int *x)
 {
 	if (*y < i)
 		*y = i;
