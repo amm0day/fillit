@@ -6,7 +6,7 @@
 /*   By: sungurea <sungurea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/15 08:21:33 by sungurea          #+#    #+#             */
-/*   Updated: 2018/09/05 18:59:01 by mnegrea          ###   ########.fr       */
+/*   Updated: 2018/09/08 14:39:26 by sungurea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,9 @@ int			post_validate(t_tetris *ttr, int sz)
 
 	k = -1;
 	while (++k < sz && (i = -1))
+	{
+		ttr[k].x = 0;
+		ttr[k].y = 0;
 		while (++i < 4 && (j = -1))
 			while (++j < 4)
 				if (ttr[k].tt[i][j] > 0 && !((i + 1 < 4 &&
@@ -86,6 +89,7 @@ int			post_validate(t_tetris *ttr, int sz)
 					free(ttr);
 					return (0);
 				}
+	}
 	return (1);
 }
 
@@ -96,22 +100,21 @@ t_tetris	*arrange(t_tetris *ttr, int sz)
 	int di;
 	int dj;
 
-	while (--sz > -1 && (i = -1) && (di = -1) && (dj = -1))
+	while (--sz > -1 && FT_Z(i, di, dj))
 		while (++i < 4 && (j = -1))
 			while (++j < 4)
 			{
-				if (ttr[sz].tt[i][j] > 0 && di < 0 && dj < 0)
+				if (di < 0 && ttr[sz].tt[i][j] > 0 && dj < 0)
 				{
 					di = i;
 					dj = j;
-					while (j && (ttr[sz].tt[i + 1][--j] || ttr[sz].tt[i + 2][j]) && --dj)
-						;
-					ttr[sz].x = 0;
-					ttr[sz].y = 0;
+					while (j-- && ((ttr[sz].tt[i + 1][j] && i < 3) ||
+						(ttr[sz].tt[i + 2][j] && i < 2)))
+						dj--;
 				}
 				if (ttr[sz].tt[i][j] > 0)
 					ft_doublecmp(i - di + 1, &(ttr[sz].y), j - dj + 1, &(ttr[sz].x));
-				if (ttr[sz].tt[i][j] > 0 && (di || dj))
+				if (ttr[sz].tt[i][j] > 0 && di > -1 && dj > -1)
 					ft_swap(&(ttr[sz].tt[i - di][j - dj]), &(ttr[sz].tt[i][j]));
 			}
 	return (ttr);

@@ -6,7 +6,7 @@
 /*   By: sungurea <sungurea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 17:06:06 by sungurea          #+#    #+#             */
-/*   Updated: 2018/09/05 19:06:56 by mnegrea          ###   ########.fr       */
+/*   Updated: 2018/09/08 14:37:08 by sungurea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
+# define FT_Z(a, b, c) ((a = -1) && (b = -1) && (c = -1))
 
 typedef struct	s_tetris
 {
@@ -50,4 +52,5 @@ void			ft_fill(int m, int tet, t_tetris *ttr);
 void			ft_alloc(int m, int **cnv, int choose);
 void			ft_remove(variables gl, int tet, int cord[2], int **cnv);
 void			ft_fillone(variables gl, int tet, int cord[2], int **cnv);
+void  			printstruct(t_tetris *ttr, int vld);
 #endif

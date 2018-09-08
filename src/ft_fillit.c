@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fx.c                                               :+:      :+:    :+:   */
+/*   ft_fillit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sungurea <sungurea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 16:51:15 by andmiron          #+#    #+#             */
-/*   Updated: 2018/09/05 18:24:12 by mnegrea          ###   ########.fr       */
+/*   Updated: 2018/09/08 14:52:43 by sungurea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,10 @@ void	ft_fill(int m, int vld, t_tetris *ttr)
 	cnv = (int**)malloc(m * sizeof(int*));
 	ft_alloc(m, cnv, 0);
 	ft_fillzero(gl.m, cnv);
+
+	printstruct(ttr, vld);
+	printf("\n------------\n\n");
+
 	while (!ft_pass(gl, 0, cnv))
 	{
 		ft_alloc(m, cnv, 1);
