@@ -6,13 +6,13 @@
 /*   By: sungurea <sungurea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 16:51:15 by andmiron          #+#    #+#             */
-/*   Updated: 2018/09/08 15:19:47 by sungurea         ###   ########.fr       */
+/*   Updated: 2018/09/08 23:44:15 by sungurea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fillit.h"
 
-void	ft_fillone(variables gl, int tet, int cord[2], int **cnv)
+void	ft_fillone(t_variables gl, int tet, int cord[2], int **cnv)
 {
 	int	yt;
 	int	xt;
@@ -27,7 +27,7 @@ void	ft_fillone(variables gl, int tet, int cord[2], int **cnv)
 	}
 }
 
-int		ft_chekones(variables gl, int tet, int cord[2], int **cnv)
+int		ft_chekones(t_variables gl, int tet, int cord[2], int **cnv)
 {
 	int	xt;
 	int	yt;
@@ -56,7 +56,7 @@ int		ft_chekones(variables gl, int tet, int cord[2], int **cnv)
 	return (1);
 }
 
-int		ft_pass(variables gl, int tet, int **cnv)
+int		ft_pass(t_variables gl, int tet, int **cnv)
 {
 	int	cord[2];
 
@@ -85,7 +85,7 @@ int		ft_pass(variables gl, int tet, int **cnv)
 
 void	ft_fill(int m, int vld, t_tetris *ttr)
 {
-	variables	gl;
+	t_variables	gl;
 	int			**cnv;
 
 	gl.ttr = ttr;
@@ -94,10 +94,6 @@ void	ft_fill(int m, int vld, t_tetris *ttr)
 	cnv = (int**)malloc(m * sizeof(int*));
 	ft_alloc(m, cnv, 0);
 	ft_fillzero(gl.m, cnv);
-
-	printstruct(ttr, vld);
-	printf("\n------------\n\n");
-
 	while (!ft_pass(gl, 0, cnv))
 	{
 		ft_alloc(m, cnv, 1);
