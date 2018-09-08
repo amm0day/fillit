@@ -6,7 +6,7 @@
 /*   By: sungurea <sungurea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/15 08:21:33 by sungurea          #+#    #+#             */
-/*   Updated: 2018/09/08 20:03:50 by sungurea         ###   ########.fr       */
+/*   Updated: 2018/09/08 23:13:19 by sungurea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,23 +74,26 @@ int			post_validate(t_tetris *ttr, int sz)
 	int	i;
 	int j;
 	int k;
+	int	n;
 
 	k = -1;
 	while (++k < sz && (i = -1))
 	{
-		ttr[k].x = 0;
-		ttr[k].y = 0;
+		FT_Z(ttr[k].x, ttr[k].y, n, -1);
 		while (++i < 4 && (j = -1))
 			while (++j < 4)
-				if (ttr[k].tt[i][j] > 0 && !((i + 1 < 4 &&
-								ttr[k].tt[i + 1][j] > 0) || (j + 1 < 4 &&
-									ttr[k].tt[i][j + 1] > 0) || (i - 1 >= 0 &&
-										ttr[k].tt[i - 1][j] > 0) ||
-							(j - 1 >= 0 && ttr[k].tt[i][j - 1] > 0)))
+				if (ttr[k].tt[i][j] > 0)
 				{
-					free(ttr);
-					return (0);
+					((i + 1 < 4 && ttr[k].tt[i + 1][j]) ? n++ : 0);
+					((j + 1 < 4 && ttr[k].tt[i][j + 1]) ? n++ : 0);
+					((i - 1 >= 0 && ttr[k].tt[i - 1][j]) ? n++ : 0);
+					((j - 1 >= 0 && ttr[k].tt[i][j - 1]) ? n++ : 0);
 				}
+		if (!(n == 5 || n == 7))
+		{
+			free(ttr);
+			return (0);
+		}
 	}
 	return (1);
 }
@@ -102,7 +105,7 @@ t_tetris	*arrange(t_tetris *ttr, int sz)
 	int di;
 	int dj;
 
-	while (--sz > -1 && FT_Z(i, di, dj))
+	while (--sz > -1 && FT_Z(i, di, dj, -1))
 		while (++i < 4 && (j = -1))
 			while (++j < 4)
 			{
