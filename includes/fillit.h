@@ -6,19 +6,18 @@
 /*   By: sungurea <sungurea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 17:06:06 by sungurea          #+#    #+#             */
-/*   Updated: 2018/09/08 23:44:55 by sungurea         ###   ########.fr       */
+/*   Updated: 2018/09/08 23:54:45 by sungurea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __FT_H
-# define __FT_H
+#ifndef FILLIT_H
+# define FILLIT_H
 
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <stdio.h>
 # define FT_Z(a, b, c, d) ((a = d) && (b = d) && (c = d))
 
 typedef struct	s_tetris
